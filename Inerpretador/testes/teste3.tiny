@@ -1,0 +1,19 @@
+writeStr (" \"Digite o valor de x: ");
+read (x);
+writeln;
+writeStr ("Digite o valor de x: ");
+read (x);
+writeln;
+writeStr ("Digite o valor de y: ");
+read (y);
+writeln;
+writeStr ("Digite o valor de y: ");
+read (y);
+writeln;
+writeStr ("O valor digitado de x foi: ");
+writeVar (x);
+writeln;
+writeStr ("O valor digitado de y foi: ");
+writeVar (y);
+writeln;
+endp

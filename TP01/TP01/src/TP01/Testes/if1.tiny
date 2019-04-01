@@ -1,0 +1,20 @@
+writeStr("Informe o tamanho dos lados do triangulo");
+writeln;
+writeStr("Lado 1= ");
+read(a);
+writeln;
+writeStr("Lado 2= ");
+read(b);
+writeln;
+writeStr("Lado 3= ");
+read(c);
+if (a = b) and (b = c) then
+   writeStr("O triangulo eh equilatero");
+else
+  if (a = b) or (a = c) or (b = c) then
+     writeStr("O triangulo eh isosceles");
+  else
+     writeStr("O triangulo eh escaleno");
+  endif
+endif
+endp
