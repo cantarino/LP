@@ -94,8 +94,8 @@ package TP01;
                 //comandoAtual = arq.proximaPalavra();
                 trataComandoAtrib(linha, variavel);
                 linha++;
+                //System.out.println(comandoAtual);
             }
-            
             
          		  
          } while (!comandoAtual.equals("endp"));
@@ -261,7 +261,6 @@ package TP01;
          do {
             cmd= (Comando) comandos.elementAt(pc);
             pc= cmd.executa();
-            System.out.println("pc "+ pc);
          } while (pc != -1);
       }
    

@@ -21,8 +21,8 @@ public class ExpComparativa extends Expressao{
         boolean v = false;
         double valor = FALSE;
 
-        opr1 = (Expressao) exp1;
-        opr2 = (Expressao) exp2;
+        opr2 = (Expressao) exp1;
+        opr1 = (Expressao) exp2;
 
         //insira seu codigo aqui
         if(op.equals(">"))
@@ -41,7 +41,6 @@ public class ExpComparativa extends Expressao{
             valor = TRUE;
         else
             valor = FALSE;
-
         return valor;
       
       }

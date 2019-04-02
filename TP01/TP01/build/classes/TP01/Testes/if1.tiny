@@ -10,11 +10,14 @@ writeStr("Lado 3= ");
 read(c);
 if (a = b) and (b = c) then
    writeStr("O triangulo eh equilatero");
+   writeln;
 else
   if (a = b) or (a = c) or (b = c) then
      writeStr("O triangulo eh isosceles");
+     writeln;
   else
      writeStr("O triangulo eh escaleno");
+     writeln;
   endif
 endif
 endp

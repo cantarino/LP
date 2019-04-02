@@ -210,8 +210,10 @@ public class ArquivoFonte {
             palavras.addElement("sqrt");
             return i + 3;
         }
-        if (c1 == 't' && c2 == 'h' && c3 == 'e' && c4 == 'n') 
+        if (c1 == 't' && c2 == 'h' && c3 == 'e' && c4 == 'n'){ 
+            palavras.addElement("then");
             return i + 4;
+        }
         return i;
     }
 
