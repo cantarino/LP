@@ -95,6 +95,16 @@ package TP01;
                 trataComandoAtrib(linha, variavel);
                 linha++;
                 //System.out.println(comandoAtual);
+            } else if (comandoAtual.equals("for")) {
+                String var = arq.proximaPalavra();
+                trataComandoAtrib(linha,comandoAtual);
+                pilhaC.push(linha);
+                trataComandoFor(linha,var);
+                linha++;
+            } else if (comandoAtual.equals("endfor")) {
+                int linhaW = (Integer) pilhaC.pop();
+                trataComandoEndfor(linha, linhaW);
+                linha++;
             }
             
          		  
@@ -159,10 +169,43 @@ package TP01;
         }
 
         private void trataComandoWhile(int lin) {
+            trataExpressao();
+            ComandoWhile c = new ComandoWhile(lin, raizArvoreExpressao);
+            comandos.addElement(c);
 
         }
 
         private void trataComandoEndw(int lin, int linhaEndW) {
+            ComandoWhile cmd = (ComandoWhile) comandos.elementAt(lin);
+            cmd.setLinhaEnd(lin + 1);
+            ComandoEndw c = new ComandoEndw(lin,linhaEndW);
+            comandos.addElement(c);
+        }
+        
+            private void trataComandoFor(int lin,String var) {
+            //trataExpressao();
+            String tipo = palavraAtual;
+            String num = arq.proximaPalavra();
+            ExpConstante exp2 = new ExpConstante (Double.parseDouble(num));
+            
+            ExpComparativa exp;
+            if(tipo.equals("to"))
+                exp = new ExpComparativa("<",raizArvoreExpressao,exp2);
+            else
+                exp = new ExpComparativa(">",raizArvoreExpressao,exp2);
+            
+            ComandoFor c = new ComandoFor(lin, var, num, tipo, exp);
+            comandos.addElement(c);
+
+        }
+
+        private void trataComandoEndfor(int lin, int linhaEndF) {
+            ComandoFor cmd = (ComandoFor) comandos.elementAt(lin);
+            String tipo = cmd.getTipo();
+            char var = cmd.getVar();
+            cmd.setLinhaEnd(lin + 1);
+            ComandoEndfor c = new ComandoEndfor(lin,linhaEndF,var,tipo);
+            comandos.addElement(c);
         }
 
         private void trataExpressao() {

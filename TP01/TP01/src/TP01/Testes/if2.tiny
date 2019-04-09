@@ -8,6 +8,7 @@ writeStr("Coeficiente c= ");
 read(c);
 d:= b * b - 4 * a * c ;
 writeVar(d);
+writeln;
 if d < 0  then
    writeStr("A equacao nao possui raizes reais");
 else
