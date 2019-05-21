@@ -1,0 +1,15 @@
+Usuario: admin
+Senha: admin
+admin
+
+Usuario: 123
+Senha: 12
+admin
+
+Usuario: cliente
+Senha: cliente
+cliente
+
+Usuario: prof
+Senha: prof
+prof

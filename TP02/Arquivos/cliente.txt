@@ -1,0 +1,7 @@
+
+Nome: clie
+Endereco: nte
+email: cliente@cliente.com
+Telefone: 1234444
+Usuario: cliente
+Senha: clinte
