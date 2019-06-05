@@ -27,11 +27,11 @@ import java.util.logging.Logger;
  */
 public class Arquivos {
 
-    private final String arquivoClientes = "/Users/cantarino/NetBeansProjects/TP02/Arquivos/cliente.txt";
-    private final String arquivoAdmins = "/Users/cantarino/NetBeansProjects/TP02/Arquivos/admin.txt";
-    private final String arquivoProfissionais = "/Users/cantarino/NetBeansProjects/TP02/Arquivos/prof.txt";
-    private final String arquivoLogins = "/Users/cantarino/NetBeansProjects/TP02/Arquivos/usuarios.txt";
-    private final String arquivoServicos = "/Users/cantarino/NetBeansProjects/TP02/Arquivos/servicos.txt";
+    private final String arquivoClientes = "/Users/cantarino/NetBeansProjects/LP/TP02/Arquivos/cliente.txt";
+    private final String arquivoAdmins = "/Users/cantarino/NetBeansProjects/LP/TP02/Arquivos/admin.txt";
+    private final String arquivoProfissionais = "/Users/cantarino/NetBeansProjects/LP/TP02/Arquivos/prof.txt";
+    private final String arquivoLogins = "/Users/cantarino/NetBeansProjects/LP/TP02/Arquivos/usuarios.txt";
+    private final String arquivoServicos = "/Users/cantarino/NetBeansProjects/LP/TP02/Arquivos/servicos.txt";
 
     public void salvarPessoa(String nome, String endereco, String email,
             String telefone, String nomeDeUsuario, String senha, String tipo) {
@@ -176,17 +176,48 @@ public class Arquivos {
             bw.newLine();
             bw.newLine();
             bw.write("Descricao: " + servico.getDescricaoServico() + "\n");
-            bw.write("Valor: " + servico.getValorServico() + "\n");
-            bw.write("Status: Inativo\n");
+            bw.write("Status: false\n");
             bw.flush();
             fw.close();
 
         } catch (FileNotFoundException ex) {//if the file cannot be found an exception will be thrown
-            System.out.println("The file " + arquivoAdmins + " could not be found! " + ex.getMessage());
+            System.out.println("The file " + arquivoServicos + " could not be found! " + ex.getMessage());
         } catch (IOException ex) {
             Logger.getLogger(Arquivos.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+    
+    public ArrayList<Servico> retornaServicos(){
+        ArrayList<Servico> servicos = new ArrayList<>();
+        try{
+            File fArquivo = new File(arquivoServicos);
+            FileReader fr = new FileReader(fArquivo);
+            BufferedReader br = new BufferedReader(fr);
+            String s = br.readLine();
+            Servico ser;
+            while(s!= null){
+                String s1[] = s.split(": ");
+                ser = new Servico(s1[1]);
+                s = br.readLine();
+                
+                s1 = s.split(" ");
+                ser.setStatusServico(Boolean.valueOf(s1[1]));
+                
+                servicos.add(ser);
+                
+                s = br.readLine();
+                s = br.readLine();
+            }
+        
+        }
+        catch (FileNotFoundException ex) {//if the file cannot be found an exception will be thrown
+            System.out.println("The file " + arquivoLogins + " could not be found! " + ex.getMessage());
+        } catch (IOException ex) {
+            Logger.getLogger(Arquivos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return servicos;
     }
 
     public void cadastrarServicos(ArrayList<Servico> servicos) {
@@ -196,14 +227,13 @@ public class Arquivos {
             BufferedWriter bw = new BufferedWriter(fw);
             for (int i = 0; i < servicos.size(); i++) {
                 bw.write("Descricao: " + servicos.get(i).getDescricaoServico() + "\n");
-                bw.write("Valor: " + servicos.get(i).getValorServico() + "\n");
-                bw.write("Status: Inativo\n");
+                bw.write("Status: false\n");
                 bw.newLine();
             }
                 bw.flush();
                 fw.close();
         } catch (FileNotFoundException ex) {//if the file cannot be found an exception will be thrown
-            System.out.println("The file " + arquivoAdmins + " could not be found! " + ex.getMessage());
+            System.out.println("The file " + arquivoServicos + " could not be found! " + ex.getMessage());
         } catch (IOException ex) {
             Logger.getLogger(Arquivos.class.getName()).log(Level.SEVERE, null, ex);
         }

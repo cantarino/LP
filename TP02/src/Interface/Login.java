@@ -18,6 +18,7 @@ public class Login extends javax.swing.JFrame {
      * Creates new form Login
      */
     private Sistema sistema;
+
     public Login() {
         initComponents();
         sistema = new Sistema();
@@ -113,20 +114,26 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
         String usuario = jTextField1.getText();
         String senha = jTextField2.getText();
-        if(sistema.logar(usuario, senha)){
-            if(sistema.isCliente())
-                new MenuCliente(usuario,sistema).setVisible(true);
-            else if (sistema.isAdmin())
-                new MenuAdmin(usuario,sistema).setVisible(true);
-            else if(sistema.isProf())
-                new MenuProf(usuario,sistema).setVisible(true);
-        }
-        else{
-            PopUpLogin p = new PopUpLogin(false,usuario);
+        if (sistema.logar(usuario, senha)) {
+            if (sistema.isCliente()) {
+                MenuCliente p = new MenuCliente(usuario, sistema);
+                p.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+                p.setVisible(true);
+            } else if (sistema.isAdmin()) {
+                MenuAdmin p = new MenuAdmin(usuario, sistema);
+                p.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+                p.setVisible(true);
+            } else if (sistema.isProf()) {
+                MenuProf p = new MenuProf(usuario, sistema);
+                p.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+                p.setVisible(true);
+            }
+        } else {
+            PopUpLogin p = new PopUpLogin(false, usuario);
             p.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
             p.setVisible(true);
         }
-            
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

@@ -1,0 +1,12 @@
+Descricao: troca tela
+Status: false
+
+Descricao: troca celular
+Status: false
+
+Descricao: troca placa mae
+Status: false
+
+Descricao: teste
+Status: false
+

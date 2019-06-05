@@ -14,12 +14,14 @@ import java.util.ArrayList;
  */
 public class Profissional extends Pessoa{
     private ArrayList <Servico> servicosPrestados;
+    private ArrayList <Integer> precos;
     public Profissional(String nome, String endereco, String email, String telefone, String nomeDeUsuario, String senha) {
         super(nome, endereco, email, telefone, nomeDeUsuario, senha);
     }
     
-    public void addServico(String descricaoServico,double valorServico){
-        servicosPrestados.add(new Servico(descricaoServico,valorServico));
+    public void addServico(String descricaoServico, int valor){
+        servicosPrestados.add(new Servico(descricaoServico));
+        precos.add(valor);
     }
     
     public Profissional (String usuario, String senha){

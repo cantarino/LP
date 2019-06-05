@@ -30,6 +30,14 @@ public class Sistema {
         //cadastrar servicos a partir de arquivo
     }
 
+    public int getNumServicos() {
+        return servicos.size();
+    }
+
+    public String getServicoAt(int i) {
+        return servicos.get(i).getDescricaoServico();
+    }
+
     public boolean logar(String usuario, String senha) {
         this.usuario = arquivos.checkUsuario(usuario, senha);
         return (this.usuario != null);
@@ -65,34 +73,34 @@ public class Sistema {
         servicos.add(new Servico(descricaoServico));
         arquivos.cadastrarServico(new Servico(descricaoServico));
     }
-    
-    public void cadastrarServicos(){
+
+    public void atualizaServicos() {
+        servicos = arquivos.retornaServicos();
+    }
+
+    public void cadastrarServicos() {
         arquivos.cadastrarServicos(servicos);
     }
 
-    public void apagarServico(String descricaoServico) {
+    public void apagarServico(int i) {
         if (usuario instanceof Administrador) {
-            for (int i = 0; i < servicos.size(); i++) {
-                if (servicos.get(i).getDescricaoServico().equals(descricaoServico)) {
-                    if (!servicos.get(i).isServicoAtivo()) {
-                        servicos.remove(i);
-                    }
-                }
+            if (!servicos.get(i).isServicoAtivo()) {
+                servicos.remove(i);
+                //salvar arquivo
+                arquivos.cadastrarServicos(servicos);
+                atualizaServicos();
             }
-            //salvar arquivo
         }
     }
 
-    public void alterarServico(String descricaoServico, String nomeServico) {
+    public void alterarServico(int i, String nomeServico) {
         if (usuario instanceof Administrador) {
-            for (int i = 0; i < servicos.size(); i++) {
-                if (servicos.get(i).getDescricaoServico().equals(descricaoServico)) {
-                    if (!servicos.get(i).isServicoAtivo()) {
-                        servicos.get(i).setDescricaoServico(descricaoServico);
-                    }
-                }
+            if (!servicos.get(i).isServicoAtivo()) {
+                servicos.get(i).setDescricaoServico(nomeServico);
+                //salvar arquivo
+                arquivos.cadastrarServicos(servicos);
+                atualizaServicos();
             }
-            //salvar arquivo
         }
     }
 

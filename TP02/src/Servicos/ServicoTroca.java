@@ -26,8 +26,8 @@ public class ServicoTroca extends Servico {
         listaPecas.add(peca);
     }
 
-    public ServicoTroca(ArrayList<String> listaPecas, String descricaoServico, double valorServico) {
-        super(descricaoServico,valorServico);
+    public ServicoTroca(ArrayList<String> listaPecas, String descricaoServico) {
+        super(descricaoServico);
         this.listaPecas = listaPecas;
     }
     
