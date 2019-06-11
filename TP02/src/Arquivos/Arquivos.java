@@ -32,6 +32,7 @@ public class Arquivos {
     private final String arquivoProfissionais = "/Users/cantarino/NetBeansProjects/LP/TP02/Arquivos/prof.txt";
     private final String arquivoLogins = "/Users/cantarino/NetBeansProjects/LP/TP02/Arquivos/usuarios.txt";
     private final String arquivoServicos = "/Users/cantarino/NetBeansProjects/LP/TP02/Arquivos/servicos.txt";
+    private final String arquivoPedidos = "/Users/cantarino/NetBeansProjects/LP/TP02/Arquivos/pedidos.txt";
 
     public void salvarPessoa(String nome, String endereco, String email,
             String telefone, String nomeDeUsuario, String senha, String tipo) {
@@ -176,7 +177,7 @@ public class Arquivos {
             bw.newLine();
             bw.newLine();
             bw.write("Descricao: " + servico.getDescricaoServico() + "\n");
-            bw.write("Status: false\n");
+            bw.write("Profissionais: \n");
             bw.flush();
             fw.close();
 
@@ -187,36 +188,37 @@ public class Arquivos {
         }
 
     }
-    
-    public ArrayList<Servico> retornaServicos(){
+
+    public ArrayList<Servico> retornaServicos() {
         ArrayList<Servico> servicos = new ArrayList<>();
-        try{
+        try {
             File fArquivo = new File(arquivoServicos);
             FileReader fr = new FileReader(fArquivo);
             BufferedReader br = new BufferedReader(fr);
             String s = br.readLine();
             Servico ser;
-            while(s!= null){
+            while (s != null) {
                 String s1[] = s.split(": ");
                 ser = new Servico(s1[1]);
                 s = br.readLine();
-                
-                s1 = s.split(" ");
-                ser.setStatusServico(Boolean.valueOf(s1[1]));
-                
+
+                s1 = s.split("Profissionais");
+                if (!s1[1].equals(": ")) {
+                    ser.addProf(s1[1]);
+                }
+
                 servicos.add(ser);
-                
+
                 s = br.readLine();
                 s = br.readLine();
             }
-        
-        }
-        catch (FileNotFoundException ex) {//if the file cannot be found an exception will be thrown
+
+        } catch (FileNotFoundException ex) {//if the file cannot be found an exception will be thrown
             System.out.println("The file " + arquivoLogins + " could not be found! " + ex.getMessage());
         } catch (IOException ex) {
             Logger.getLogger(Arquivos.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return servicos;
     }
 
@@ -227,13 +229,54 @@ public class Arquivos {
             BufferedWriter bw = new BufferedWriter(fw);
             for (int i = 0; i < servicos.size(); i++) {
                 bw.write("Descricao: " + servicos.get(i).getDescricaoServico() + "\n");
-                bw.write("Status: false\n");
+                bw.write("Profissionais: ");
+                for (int j = 0; j < servicos.get(i).getSize(); j++) {
+                    bw.write(servicos.get(i).getProf(j) + "-"
+                            + servicos.get(i).getPreco(j) + " ");
+                }
+                bw.newLine();
                 bw.newLine();
             }
-                bw.flush();
-                fw.close();
+            bw.flush();
+            fw.close();
         } catch (FileNotFoundException ex) {//if the file cannot be found an exception will be thrown
             System.out.println("The file " + arquivoServicos + " could not be found! " + ex.getMessage());
+        } catch (IOException ex) {
+            Logger.getLogger(Arquivos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void salvarPedido(String descServico, String prof, String cliente) {
+        try {
+            File fArquivo = new File(arquivoPedidos);
+            FileReader fr = new FileReader(fArquivo);
+            BufferedReader br = new BufferedReader(fr);
+            //chega no final
+            String s = br.readLine();
+            String s2 = s;
+            while (s2 != null) {
+                s2 = br.readLine();
+                if (s2 != null) {
+                    s += "\n" + s2;
+                }
+            }
+            fr.close();
+            br.close();
+
+            FileWriter fw = new FileWriter(fArquivo);
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write(s);
+            bw.newLine();
+            bw.newLine();
+            bw.write("Descricao: " + descServico + "\n");
+            bw.write("Profissional: " + prof + "\n");
+            bw.write("Cliente: " + cliente + '\n');
+            bw.write("Status: Aguardando\n\n");
+            
+            bw.flush();
+            fw.close();
+        } catch (FileNotFoundException ex) {//if the file cannot be found an exception will be thrown
+            System.out.println("The file " + arquivoPedidos + " could not be found! " + ex.getMessage());
         } catch (IOException ex) {
             Logger.getLogger(Arquivos.class.getName()).log(Level.SEVERE, null, ex);
         }

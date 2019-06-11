@@ -85,7 +85,7 @@ public class SelecionarServico extends javax.swing.JFrame {
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1)
-                .addContainerGap(178, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -93,6 +93,8 @@ public class SelecionarServico extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        int i = jComboBox1.getSelectedIndex();
+        s.cadastraPreco(i, Integer.parseInt(jTextField1.getText()));
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

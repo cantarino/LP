@@ -89,6 +89,9 @@ public class MenuCliente extends javax.swing.JFrame {
             p.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
             p.setVisible(true);
         }
+        if(i == 0){
+            new ContrataServico(s).setVisible(true);
+        }
         
     }//GEN-LAST:event_jButton1ActionPerformed
 

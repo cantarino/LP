@@ -84,12 +84,10 @@ public class Sistema {
 
     public void apagarServico(int i) {
         if (usuario instanceof Administrador) {
-            if (!servicos.get(i).isServicoAtivo()) {
                 servicos.remove(i);
                 //salvar arquivo
                 arquivos.cadastrarServicos(servicos);
                 atualizaServicos();
-            }
         }
     }
 
@@ -103,5 +101,18 @@ public class Sistema {
             }
         }
     }
-
+    
+    public void cadastraPreco(int index,int preco){
+        servicos.get(index).setProf(usuario.getNomeDeUsuario().substring(9), preco);
+        arquivos.cadastrarServicos(servicos);
+        atualizaServicos();
+    }
+    
+    public ArrayList<String> getPrecos(int index){
+        return servicos.get(index).getPrecos();
+    }
+    
+    public void salvaPedido(String descServico, String prof){
+        arquivos.salvarPedido(descServico, prof, usuario.getNomeDeUsuario().substring(9));
+    }
 }
