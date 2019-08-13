@@ -272,7 +272,7 @@ public class Arquivos {
             bw.write("Profissional: " + prof + "\n");
             bw.write("Cliente: " + cliente + '\n');
             bw.write("Status: Aguardando\n\n");
-            
+
             bw.flush();
             fw.close();
         } catch (FileNotFoundException ex) {//if the file cannot be found an exception will be thrown
@@ -281,4 +281,111 @@ public class Arquivos {
             Logger.getLogger(Arquivos.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    public ArrayList<String> getPedidosProf(String prof) {
+        ArrayList<String> ped = new ArrayList();
+        try {
+            File fArquivo = new File(arquivoPedidos);
+            FileReader fr = new FileReader(fArquivo);
+            BufferedReader br = new BufferedReader(fr);
+
+            String s = br.readLine();
+            String s1 = br.readLine();
+            while (s != null && s1 != null) {
+                if (s1.equals("Profissional: " + prof)) {
+                    ped.add(s);
+                }
+                s = br.readLine();
+                s1 = br.readLine();
+            }
+
+        } catch (FileNotFoundException ex) {//if the file cannot be found an exception will be thrown
+            System.out.println("The file " + arquivoPedidos + " could not be found! " + ex.getMessage());
+        } catch (IOException ex) {
+            Logger.getLogger(Arquivos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ped;
+    }
+
+    public void negarPedido(String prof,String desc) {
+        try {
+            File fArquivo = new File(arquivoPedidos);
+            FileReader fr = new FileReader(fArquivo);
+            BufferedReader br = new BufferedReader(fr);
+
+            String s[] = new String [4];
+            s[0] = br.readLine();
+            String s2 =s[0];
+            while (s[0] != null) {
+                s[1] = br.readLine();
+                s[2] = br.readLine();
+                s[3] = br.readLine();
+                if (s2 != null) {
+                    if(s[0].equals(desc))
+                        if(s[1].equals(prof))
+                            s[3] = "Status: Negado";
+                }
+                s2 += s[1] + s[2] +s[3] + "\n";
+                s[0] = br.readLine();
+                s[0] = br.readLine();
+            }
+            fr.close();
+            br.close();
+
+            FileWriter fw = new FileWriter(fArquivo);
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write(s2);
+            bw.newLine();
+            
+            bw.flush();
+            fw.close();
+
+        } catch (FileNotFoundException ex) {//if the file cannot be found an exception will be thrown
+            System.out.println("The file " + arquivoPedidos + " could not be found! " + ex.getMessage());
+        } catch (IOException ex) {
+            Logger.getLogger(Arquivos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+        public void executarPedido(String prof,String desc) {
+        try {
+            File fArquivo = new File(arquivoPedidos);
+            FileReader fr = new FileReader(fArquivo);
+            BufferedReader br = new BufferedReader(fr);
+
+            String s[] = new String [4];
+            s[0] = br.readLine();
+            String s2 =s[0];
+            while (s[0] != null) {
+                s[1] = br.readLine();
+                s[2] = br.readLine();
+                s[3] = br.readLine();
+                if (s2 != null) {
+                    if(s[0].equals(desc))
+                        if(s[1].equals(prof))
+                            s[3] = "Status: Executado";
+                }
+                s2 += s[1] + s[2] +s[3] + "\n";
+                s[0] = br.readLine();
+                s[0] = br.readLine();
+            }
+            fr.close();
+            br.close();
+
+            FileWriter fw = new FileWriter(fArquivo);
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write(s2);
+            bw.newLine();
+            
+            bw.flush();
+            fw.close();
+
+        } catch (FileNotFoundException ex) {//if the file cannot be found an exception will be thrown
+            System.out.println("The file " + arquivoPedidos + " could not be found! " + ex.getMessage());
+        } catch (IOException ex) {
+            Logger.getLogger(Arquivos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+        
+        
 }

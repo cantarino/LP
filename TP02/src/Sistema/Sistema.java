@@ -115,4 +115,16 @@ public class Sistema {
     public void salvaPedido(String descServico, String prof){
         arquivos.salvarPedido(descServico, prof, usuario.getNomeDeUsuario().substring(9));
     }
+    
+    public ArrayList<String> getPedidosProf(){
+        return arquivos.getPedidosProf(usuario.getNomeDeUsuario().substring(9));
+    }
+    
+    public void negaPedido(String pedido){
+        arquivos.negarPedido(usuario.getNomeDeUsuario().substring(9), pedido);
+    }
+    
+    public void executarPedido(String pedido){
+        arquivos.executarPedido(usuario.getNomeDeUsuario().substring(9), pedido);   
+    }
 }
