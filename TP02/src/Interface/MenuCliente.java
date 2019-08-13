@@ -18,12 +18,13 @@ public class MenuCliente extends javax.swing.JFrame {
      * Creates new form MenuPrincipal
      */
     Sistema s;
-    public MenuCliente(String usuario,Sistema s) {
+
+    public MenuCliente(String usuario, Sistema s) {
         initComponents();
         this.s = s;
-        jLabel1.setText("Bem-Vindo, "+ usuario);
+        jLabel1.setText("Bem-Vindo, " + usuario);
     }
-    
+
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -79,20 +80,22 @@ public class MenuCliente extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         int i = jComboBox1.getSelectedIndex();
-        if(i == 3){
-            CadastrarUsuario p = new CadastrarUsuario(s,true);
+        if (i == 3) {
+            CadastrarUsuario p = new CadastrarUsuario(s, false);
             p.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
             p.setVisible(true);
         }
-        if(i == 1){
+        if (i == 1) {
             CadastrarServico p = new CadastrarServico(s);
             p.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
             p.setVisible(true);
         }
-        if(i == 0){
-            new ContrataServico(s).setVisible(true);
+        if (i == 0) {
+            ContrataServico p = new ContrataServico(s);
+            p.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+            p.setVisible(true);
         }
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

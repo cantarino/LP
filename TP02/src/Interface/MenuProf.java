@@ -81,7 +81,7 @@ public class MenuProf extends javax.swing.JFrame {
         // TODO add your handling code here:
         int i = jComboBox1.getSelectedIndex();
         if (i == 3) {
-            CadastrarUsuario p = new CadastrarUsuario(s, true);
+            CadastrarUsuario p = new CadastrarUsuario(s, false);
             p.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
             p.setVisible(true);
         }
@@ -95,6 +95,8 @@ public class MenuProf extends javax.swing.JFrame {
             p.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
             p.setVisible(true);
         }
+        if(i == 2)
+            new ExecutarPedidos(s).setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
